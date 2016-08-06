@@ -33,6 +33,31 @@ public class SignUpActivity extends AppCompatActivity {
         avatar3RadioButton = (RadioButton) findViewById(R.id.radioButton4);
         avatar4RadioButton = (RadioButton) findViewById(R.id.radioButton5);
 
+        // Radio Controller
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.radioButton:
+                        avatarString = "0";
+                        break;
+                    case R.id.radioButton2:
+                        avatarString = "1";
+                        break;
+                    case R.id.radioButton3:
+                        avatarString = "2";
+                        break;
+                    case R.id.radioButton4:
+                        avatarString = "3";
+                        break;
+                    case R.id.radioButton5:
+                        avatarString = "4";
+                        break;
+
+                }
+            }
+        });
+
     } // Main Method
 
     public void clickSignUpSign(View view) {
@@ -48,6 +73,16 @@ public class SignUpActivity extends AppCompatActivity {
             myAlert.myDialog(this, 0, "มีช่องว่าง", "กรุณากรอกทุกช่อง ค่ะ");
 
 
+        } else if (avatar0RadioButton.isChecked()||
+                avatar1RadioButton.isChecked()||
+                avatar2RadioButton.isChecked()||
+                avatar3RadioButton.isChecked()||
+                avatar4RadioButton.isChecked()) {
+            //Have Check
+        } else {
+            //un check
+            MyAlert myAlert = new MyAlert();
+            myAlert.myDialog(this, 1, "ยังไม่ได้เลือก avatar", "กรุณาเลือก avatar ด้วยค่ะ");
         }
     } // clickSign
 
