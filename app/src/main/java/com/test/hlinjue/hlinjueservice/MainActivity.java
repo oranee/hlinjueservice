@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
         //Explicit
         private Context context;
-        private String myUserString, myPasswordString, truePawordString, nameString;
+        private String myUserString, myPasswordString, truePasswordString, nameString, avatarString;
+
         private static final String urlJSON = "http://swiftcodingthai.com/6aug/get_user_hlinjue.php";
         private boolean statusABoolean = true;
 
@@ -88,9 +89,11 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     if (myUserString.equals(jsonObject.getString("User"))) {
 
-                        truePawordString = jsonObject.getString("Password");
+                        truePasswordString = jsonObject.getString("Password");
                         nameString = jsonObject.getString("Name");
                         statusABoolean = false;
+                        avatarString = jsonObject.getString("Avatar");
+
 
                     } // if
 
@@ -99,9 +102,16 @@ public class MainActivity extends AppCompatActivity {
                 if (statusABoolean) {
                     MyAlert myAlert = new MyAlert();
                     myAlert.myDialog(context, 4, " ไม่มี user นี้", "ไม่มี" + myUserString + " ในฐานข้อมูลเรา");
-                } else if (passwordString.equals(truePawordString)) {
+                } else if (passwordString.equals(truePasswordString)) {
                     // password True
                     Toast.makeText(context, " Welcome" + nameString, Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(MainActivity.this, ServiceActivity.class);
+                    intent.putExtra("Name", nameString);
+                    intent.putExtra("Avatar", avatarString);
+                    startActivity(intent);
+                    finish();
+
                 } else {
                  // password false
                 MyAlert myAlert = new MyAlert();
